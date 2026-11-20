@@ -22,36 +22,41 @@ const mobile = {
         return this.isMobile;
     },
     
-    handleResize() {
-        const wasMobile = this.isMobile;
-        this.checkMobile();
+handleResize() {
+    const prevIsMobile = this.isMobile;
+    this.checkMobile();
         
         // Toggle mobile menu button visibility
         const menuToggle = document.getElementById('mobile-menu-toggle');
-        if (menuToggle) {
-            menuToggle.style.display = this.isMobile ? 'flex' : 'none';
-        }
+    if (menuToggle) {
+        menuToggle.style.display = this.isMobile ? 'flex' : 'none';
+    }
         
         // Toggle sidebar behavior
         const sidebar = document.getElementById('sidebar');
-        if (sidebar) {
-            if (this.isMobile) {
-                sidebar.classList.remove('open');
-                this.sidebarOpen = false;
-            } else {
-                sidebar.style.transform = '';
+    if (sidebar) {
+        if (this.isMobile) {
+            if (!prevIsMobile && this.sidebarOpen) {
+                this.closeSidebar();
             }
+        } else {
+            sidebar.classList.remove('open');
+            sidebar.style.transform = '';
+            this.sidebarOpen = false;
+            document.getElementById('sidebar-overlay')?.classList.remove('show');
+            document.body.style.overflow = '';
         }
+    }
         
         // Toggle bottom nav
         const bottomNav = document.getElementById('bottom-nav');
-        if (bottomNav) {
-            bottomNav.style.display = this.isMobile ? 'flex' : 'none';
-        }
+    if (bottomNav) {
+        bottomNav.style.display = this.isMobile ? 'flex' : 'none';
+    }
         
         // Update tables to cards on mobile
         this.updateTableViews();
-    },
+}
     
     initSidebar() {
         const menuToggle = document.getElementById('mobile-menu-toggle');
