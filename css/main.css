@@ -1290,8 +1290,9 @@ img {
 
 /* Mobile Bottom Navigation */
 @media (max-width: 576px) {
-    .sidebar {
-        display: none;
+    .main-content {
+        margin-left: 0;
+        padding-bottom: 70px;
     }
     
     .main-content {
